@@ -48,7 +48,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "3232196487";
+    const serviceWorkerVersion = "222959177";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -69,6 +69,8 @@
       });
     });
   </script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
 <script type="module">
   // Import the functions you need from the SDKs you need
@@ -78,7 +80,7 @@
   // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
-
+  
   const firebaseConfig = {
   apiKey: "AIzaSyCl-6fyhtyMDXFn6hjqWbJb-DY4dG8l-kk",
   authDomain: "matchme-production.firebaseapp.com",
@@ -90,17 +92,36 @@
   measurementId: "G-M9FLKLXQW1"
 };
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  window.onload = function () {
-    setTimeout(function () {
-      var loadingIndicator = document.getElementById("loading_indicator");
-      if (loadingIndicator) {
-        loadingIndicator.remove();
-      }
-    }, 10000);
-  };
+//  const app = initializeApp(firebaseConfig);
+
+  firebase.initializeApp(firebaseConfig);
+
+//  const analytics = getAnalytics(app);
+  // window.onload = function () {
+  //   setTimeout(function () {
+  //     var loadingIndicator = document.getElementById("loading_indicator");
+  //     if (loadingIndicator) {
+  //       loadingIndicator.remove();
+  //     }
+  //   }, 10000);
+  // };
 </script>
 
+
+<script>
+  window.addEventListener('load', function(ev) {
+    // Download main.dart.js
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+        serviceWorkerVersion: serviceWorkerVersion,
+      },
+      onEntrypointLoaded: function(engineInitializer) {
+        engineInitializer.initializeEngine().then(function(appRunner) {
+          appRunner.runApp();
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
